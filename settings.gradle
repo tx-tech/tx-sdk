@@ -1,0 +1,5 @@
+//include ':demosdk'//include ':demo'
+//include ':app'
+include ':video'
+
+rootProject.name = "zhzysdk_gsed"

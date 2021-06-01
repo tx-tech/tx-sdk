@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="tx_icon_margin">10dp</dimen>
+    <dimen name="tx_icon_width">0dp</dimen>
+    <dimen name="tx_icon_height">40dp</dimen>
+    <dimen name="tx_item_text_size">15sp</dimen>
+    <dimen name="tx_title_text_size">15sp</dimen>
+    <dimen name="tx_dp_40">40dp</dimen>
+    <dimen name="tx_dp_10">10dp</dimen>
+</resources>

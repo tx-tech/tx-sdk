@@ -1,0 +1,18 @@
+<resources>
+    <string name="tx_str_invite">邀请用户</string>
+    <string name="tx_errcode_success">发送成功</string>
+    <string name="tx_errcode_cancel">发送取消</string>
+    <string name="tx_errcode_deny">发送被拒绝</string>
+    <string name="tx_errcode_unsupported">不支持错误</string>
+    <string name="tx_errcode_unknown">发送返回</string>
+    <string name="tx_joinroom_error">加入房间失败</string>
+    <string name="tx_showscreen_error">投屏失败！！！</string>
+    <string name="tx_dialog_exit_cancel">取消</string>
+    <string name="tx_dialog_exit_title">确定删除?</string>
+    <string name="tx_dialog_exit_confirm">确定</string>
+    <string name="tx_dialog_exit_content"></string>
+    <string name="tx_brvah_app_name">Library</string>
+    <string name="tx_brvah_loading">正在加载中...</string>
+    <string name="tx_brvah_load_failed">加载失败，请点我重试</string>
+    <string name="tx_brvah_load_end">没有更多数据</string>
+</resources>
