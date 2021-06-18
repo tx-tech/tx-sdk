@@ -14,12 +14,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/08/02
- *     desc  : utils about shared preference
- * </pre>
+ * Created by JustinWjq
+ *
+ * @date 2020/9/4.
+ * description：
  */
 @SuppressLint("ApplySharedPref")
 public final class SPUtils {

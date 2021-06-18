@@ -26,12 +26,10 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2018/04/20
- *     desc  : utils about uri
- * </pre>
+ * Created by JustinWjq
+ *
+ * @date 2020/9/4.
+ * description：
  */
 public final class UriUtils {
 

@@ -2,27 +2,17 @@ package com.txt.video;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 
 
 import com.txt.video.net.bean.TxConfig;
-import com.txt.video.net.http.HttpRequestClient;
 import com.txt.video.net.http.SystemHttpRequest;
-import com.txt.video.net.utils.TxLogUtils;
 import com.txt.video.ui.trtc.TICManager;
+import com.txt.video.ui.video.onTxVideoBtClickListener;
 import com.txt.video.widget.callback.StartVideoResultOnListener;
 import com.txt.video.widget.callback.onCreateRoomListener;
-import com.txt.video.widget.utils.PermissionConstants;
-import com.txt.video.widget.utils.PermissionUtils;
 import com.txt.video.widget.utils.Utils;
-import com.txt.video.ui.video.VideoActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 
 /**
@@ -44,7 +34,7 @@ public class TXSdk extends TXSDKApi {
 
     private boolean isDemo = false;
 
-    private String SDKVersion = "v1.1.2";
+    private String SDKVersion = "v1.1.3";
 
     private String terminal = "Android";
 
@@ -190,23 +180,43 @@ public class TXSdk extends TXSDKApi {
 
     @Override
     public void createRoom(final String agent, String orgAccount, String sign, final onCreateRoomListener listener) {
-        TXManager.getInstance().createRoom(agent,orgAccount,sign,null,null,listener);
+        TXManager.getInstance().createRoom(agent, orgAccount, sign, null, null, listener);
     }
 
     @Override
     public void createRoom(String agent, String orgAccount, String sign, JSONObject roomInfo, onCreateRoomListener listener) {
-        TXManager.getInstance().createRoom(agent,orgAccount,sign,roomInfo,null,listener);
+        TXManager.getInstance().createRoom(agent, orgAccount, sign, roomInfo, null, listener);
     }
 
     @Override
     public void createRoom(String agent, String orgAccount, String sign, JSONObject roomInfo, JSONObject businessData, onCreateRoomListener listener) {
-        TXManager.getInstance().createRoom(agent,orgAccount,sign,roomInfo,businessData,listener);
+        TXManager.getInstance().createRoom(agent, orgAccount, sign, roomInfo, businessData, listener);
     }
 
     @Override
-    public void joinRoom(final Activity context, String roomId, String userName,JSONObject businessData,  final StartVideoResultOnListener listener) {
+    public void joinRoom(final Activity context, String roomId, String userName, JSONObject businessData, final StartVideoResultOnListener listener) {
         TXManager.getInstance().checkPermission(context, roomId, userName, null, businessData, listener);
     }
+
+
+    private onTxVideoBtClickListener mOnTxVideoBtClickListener;
+
+    @Override
+    public void setOnTxVideoBtListener(onTxVideoBtClickListener onTxVideoBtClickListener) {
+        this.mOnTxVideoBtClickListener = onTxVideoBtClickListener;
+    }
+
+    @Override
+    public void removeOnTxVideoBtListener(onTxVideoBtClickListener onTxVideoBtClickListener) {
+        if (null != onTxVideoBtClickListener) {
+            onTxVideoBtClickListener = null;
+        }
+    }
+
+    public onTxVideoBtClickListener getOnTxVideoBtListener() {
+        return this.mOnTxVideoBtClickListener;
+    }
+
 
     public void unInit() {
         if (TICManager.getInstance() != null)
@@ -220,7 +230,18 @@ public class TXSdk extends TXSDKApi {
         RELEASE
     }
 
-    public interface TXSDKErrorCode{
+    /**
+     * 按钮类型
+     */
+    public enum VideoBtType {
+        MUTEVIDEO,
+        MUTEAUDIO,
+        SWITCHVIDEO,
+        STARTSCREEN,
+        SHOWFLOAT
+    }
+
+    public interface TXSDKErrorCode {
         int TXSDK_ERROR_INVITENUMBER_INVALID = 1;
 
     }

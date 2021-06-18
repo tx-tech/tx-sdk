@@ -205,71 +205,86 @@
     </LinearLayout>
 
 
-
-
-    <ImageButton
+    <TextView
         android:id="@+id/tx_business_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/tx_business_video_selector"
+        android:layout_marginBottom="8dp"
+        android:drawableTop="@drawable/tx_business_video_selector"
+        android:drawablePadding="@dimen/tx_dp_10"
         android:onClick="onTxClick"
+        android:textColor="@color/tx_color_ededed"
         style="@style/tx_style_button"
+        tools:text="关闭视频"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tx_business_audio_mute"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-    <ImageButton
+    <TextView
         android:id="@+id/tx_business_audio_mute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/tx_business_mute_selector"
+        android:drawableTop="@drawable/tx_business_mute_selector"
+        android:drawablePadding="@dimen/tx_dp_10"
+        android:textColor="@color/tx_color_ededed"
         android:onClick="onTxClick"
+        android:gravity="center"
         style="@style/tx_style_button"
+        tools:text="关闭静音"
         app:layout_constraintBottom_toBottomOf="@+id/tx_business_video"
         app:layout_constraintEnd_toStartOf="@+id/tx_business_switch"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tx_business_video" />
 
 
-    <ImageButton
+    <TextView
         android:id="@+id/tx_business_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/tx_business_switch_selector"
+        android:drawableTop="@drawable/tx_business_switch_selector"
+        android:drawablePadding="@dimen/tx_dp_10"
+        android:textColor="@color/tx_color_ededed"
         android:onClick="onTxClick"
         style="@style/tx_style_button"
+        tools:text="反转镜头"
         app:layout_constraintBottom_toBottomOf="@+id/tx_business_video"
-        app:layout_constraintEnd_toStartOf="@+id/tx_business_share"
+        app:layout_constraintEnd_toStartOf="@+id/tx_business_screen"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tx_business_audio_mute" />
 
-    <ImageButton
-        android:id="@+id/tx_business_share"
+
+    <TextView
+        android:id="@+id/tx_business_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/tx_icon_business_float"
+        android:drawableTop="@drawable/tx_business_screen_selector"
+        android:drawablePadding="@dimen/tx_dp_10"
+        android:textColor="@color/tx_color_ededed"
         android:onClick="onTxClick"
         style="@style/tx_style_button"
+        tools:text="开启投屏"
         app:layout_constraintBottom_toBottomOf="@+id/tx_business_video"
-        app:layout_constraintEnd_toStartOf="@+id/tx_business_screen"
+        app:layout_constraintEnd_toStartOf="@+id/tx_business_share"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tx_business_switch" />
 
 
-    <ImageButton
-        android:id="@+id/tx_business_screen"
+    <TextView
+        android:id="@+id/tx_business_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/tx_business_screen_selector"
+        android:drawableTop="@drawable/tx_icon_business_float"
+        android:drawablePadding="@dimen/tx_dp_10"
+        android:textColor="@color/tx_color_ededed"
         android:onClick="onTxClick"
         style="@style/tx_style_button"
+        tools:text="显示浮窗"
         app:layout_constraintBottom_toBottomOf="@+id/tx_business_video"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tx_business_share" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tx_business_screen" />
+
 
     <ViewStub
         android:id="@+id/bigscreen"

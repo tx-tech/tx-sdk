@@ -79,6 +79,8 @@ public class Contract {
         fun muteLocalVideo()
 
         fun switchCamera()
+
+        fun initBottomBt()
     }
 
 

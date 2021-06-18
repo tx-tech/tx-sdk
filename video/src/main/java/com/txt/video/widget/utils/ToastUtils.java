@@ -1,11 +1,6 @@
 package com.txt.video.widget.utils;
 
-/**
- * Created by JustinWjq
- *
- * @date 2020/9/4.
- * description：
- */
+
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -36,14 +31,11 @@ import android.widget.Toast;
 import com.txt.video.TXSdk;
 
 import java.lang.reflect.Field;
-
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/09/29
- *     desc  : utils about toast
- * </pre>
+ * Created by JustinWjq
+ *
+ * @date 2020/9/4.
+ * description：
  */
 public final class ToastUtils {
 

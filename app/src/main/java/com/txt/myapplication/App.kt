@@ -26,6 +26,14 @@ class App : Application() {
         txConfig.miniprogramTitle ="国寿e店"
         txConfig.miniprogramCard ="国寿e店分享"
         txConfig.isShowTemporaryButton =false
+
+        txConfig.startScreenTitle ="开始同屏"
+        txConfig.stopScreenTitle ="结束同屏"
+        txConfig.startVideoTitle ="开启"
+        txConfig.stopVideoTitle ="关闭"
+        txConfig.startAudioTitle ="开启音乐"
+        txConfig.stopAudioTitle ="关闭音乐"
+        txConfig.showFloatTitle ="展示计划书"
         //2。域名环境 3。log显示 4。分享小程序的配置
         TXSdk.getInstance().init(this, TXSdk.Environment.TEST, true, txConfig)
         //设置演示demo 为true 为了一个手机装两个app，一个是客户的，一个是演示的app，区分隐式跳转

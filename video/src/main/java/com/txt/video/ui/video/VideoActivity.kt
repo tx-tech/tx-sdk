@@ -127,6 +127,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
             , VOLUME_SHOW
         )
         tx_business_audio_mute.isSelected = !audioConfig.isEnableAudio
+        initBottomBt()
     }
 
     override fun muteLocalVideo() {
@@ -151,12 +152,14 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         )
         isCloseVideo = !enableVideo
         tx_business_video.isSelected = !enableVideo
+        initBottomBt()
     }
 
     override fun switchCamera() {
         //反转镜头
         mPresenter.getTRTCCloudManager().switchCamera()
         tx_business_switch.isSelected = !mPresenter.getTRTCCloudManager().isFontCamera
+        initBottomBt()
     }
 
     override fun destroyRoom() {
@@ -180,6 +183,37 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         }
     }
 
+
+    override fun initBottomBt() {
+        tx_business_video.text = if (tx_business_video.isSelected) {
+            TXSdk.getInstance().txConfig.startVideoTitle
+        }else{
+            TXSdk.getInstance().txConfig.stopVideoTitle
+        }
+        tx_business_audio_mute.text =   if (tx_business_audio_mute.isSelected) {
+            TXSdk.getInstance().txConfig.startAudioTitle
+        }else{
+            TXSdk.getInstance().txConfig.stopAudioTitle
+        }
+        tx_business_switch.text = if (tx_business_switch.isSelected) {
+            TXSdk.getInstance().txConfig.switchVideoTitle
+        }else{
+            TXSdk.getInstance().txConfig.switchVideoTitle
+        }
+        tx_business_screen.text = if (tx_business_screen.isSelected) {
+            TXSdk.getInstance().txConfig.stopScreenTitle
+        }else{
+            TXSdk.getInstance().txConfig.startScreenTitle
+        }
+
+        tx_business_share.text =  if (tx_business_share.isSelected) {
+            TXSdk.getInstance().txConfig.showFloatTitle
+        }else{
+            TXSdk.getInstance().txConfig.showFloatTitle
+        }
+
+
+    }
 
     override fun initViews() {
 
@@ -233,6 +267,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         regToWx()
         showInviteBt(true)
         showTitle()
+        initBottomBt()
     }
 
     override fun processSelfVideoPlay() {
@@ -281,6 +316,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         mPresenter.setScreenStatus(true)
         isShare = true
         tx_business_screen.isSelected = true
+        initBottomBt()
         val entity =
             mPresenter.getStringMemberEntityMap()[mPresenter.getTRTCParams().userId]
         entity?.isScreen = true
@@ -300,6 +336,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         mPresenter.setScreenStatus(false)
         isShare = false
         tx_business_screen.isSelected = false
+        initBottomBt()
         hideFloatingWindow()
 
         val entity =
@@ -309,6 +346,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         )
         if (isCloseVideo) {
             tx_business_video.isSelected = isCloseVideo
+            initBottomBt()
             mPresenter.getTRTCCloudManager().muteLocalVideo(isCloseVideo)
             entity?.isMuteVideo = isCloseVideo
             mMemberListAdapter!!.notifyItemChanged(
@@ -934,6 +972,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
 
     override fun onDestroy() {
         super.onDestroy()
+        TXSdk.getInstance().removeOnTxVideoBtListener(TXSdk.getInstance().onTxVideoBtListener)
         unregisterReceiver(broadcastReceiver)
     }
 
@@ -973,18 +1012,20 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
 
             showShareDialog()
         } else if (id == R.id.tx_business_video) {
+            TXSdk.getInstance().onTxVideoBtListener?.onTxVideoBtClick(TXSdk.VideoBtType.MUTEVIDEO)
             muteLocalVideo()
         } else if (id == R.id.tx_business_audio_mute) {
+            TXSdk.getInstance().onTxVideoBtListener?.onTxVideoBtClick(TXSdk.VideoBtType.MUTEAUDIO)
             muteLocalAudio()
 
-
         } else if (id == R.id.tx_business_switch) {
+            TXSdk.getInstance().onTxVideoBtListener?.onTxVideoBtClick(TXSdk.VideoBtType.SWITCHVIDEO)
            switchCamera()
 
         } else if (id == R.id.tx_business_share) {
             //文档共享
 //            if (mPresenter.isOwner())
-
+            TXSdk.getInstance().onTxVideoBtListener?.onTxVideoBtClick(TXSdk.VideoBtType.SHOWFLOAT)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 TxLogUtils.i("AndroidSystemUtil.getDevice()", AndroidSystemUtil.getDevice())
                 if (!PermissionUtils.isGrantedDrawOverlays()) {
@@ -1011,7 +1052,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
             }
         } else if (id == R.id.tx_business_screen) {
             //投屏 如果关闭摄像头，投屏中自动打开
-
+            TXSdk.getInstance().onTxVideoBtListener?.onTxVideoBtClick(TXSdk.VideoBtType.STARTSCREEN)
             if (!mPresenter.isOwner()) {
                 ToastUtils.showLong("您目前暂无权限开启投屏")
                 return
@@ -1023,6 +1064,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
                 if (isCloseVideo) {
                     mPresenter.getTRTCCloudManager().muteLocalVideo(false)
                     tx_business_video.isSelected = false
+                    initBottomBt()
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     TxLogUtils.i("AndroidSystemUtil.getDevice()", AndroidSystemUtil.getDevice())
@@ -1589,7 +1631,7 @@ class VideoActivity : BaseMVPActivity<Contract.ICollectView, VideoPresenter>(), 
         }
         tx_business_share.isEnabled = isEnable
         tx_business_share.isSelected = !isEnable
-
+        initBottomBt()
     }
 
     companion object {

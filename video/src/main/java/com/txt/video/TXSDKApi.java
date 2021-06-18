@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.txt.video.net.bean.TxConfig;
+import com.txt.video.ui.video.onTxVideoBtClickListener;
 import com.txt.video.widget.callback.StartVideoResultOnListener;
 import com.txt.video.widget.callback.onCreateRoomListener;
 
@@ -214,4 +215,23 @@ public abstract class TXSDKApi {
      * @note
      */
     public abstract void joinRoom(final Activity context, String roomId, String userName,JSONObject businessData, final StartVideoResultOnListener listener);
+
+
+    /**
+     *按钮监听
+     *
+     * @param onTxVideoBtClickListener
+     *
+     * @return
+     */
+    public abstract void setOnTxVideoBtListener(onTxVideoBtClickListener onTxVideoBtClickListener);
+
+    /**
+     *按钮监听
+     *
+     * @param onTxVideoBtClickListener
+     *
+     * @return
+     */
+    public abstract void removeOnTxVideoBtListener(onTxVideoBtClickListener onTxVideoBtClickListener);
 }

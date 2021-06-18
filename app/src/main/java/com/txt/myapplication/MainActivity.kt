@@ -3,30 +3,26 @@ package com.txt.myapplication
 //import com.txt.video.widget.utils.ToastUtils
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.webkit.JsResult
-import android.webkit.WebChromeClient
-import android.webkit.WebView
 import android.widget.Toast
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.interfaces.SimpleCallback
 import com.txt.video.TXSdk
-import com.txt.video.net.bean.TxConfig
+import com.txt.video.net.utils.TxLogUtils
+import com.txt.video.ui.video.onTxVideoBtClickListener
 //import com.txt.video.net.utils.TxLogUtils
 //import com.txt.video.net.utils.TxLogUtils
 import com.txt.video.widget.callback.StartVideoResultOnListener
 import com.txt.video.widget.callback.onCreateRoomListener
 //import com.txt.video.widget.utils.AndroidSystemUtil
-import com.txt.video.widget.utils.PermissionUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, onTxVideoBtClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +95,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         check_bt.setOnClickListener(this)
 
         changeUI()
+        TXSdk.getInstance().setOnTxVideoBtListener(this)
     }
 
 
@@ -181,7 +178,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val l = System.currentTimeMillis() / 1000
         Log.i("currentTimeMillis", "" + l)
         val encrypt: String = SignUtils.Encrypt(orgAccount + "" + l)
-
         if (isCreateRoom) {
             TXSdk.getInstance().createRoom(
                 loginName,
@@ -189,7 +185,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 encrypt,
                 object :
                     onCreateRoomListener {
-                    override fun onResultSuccess(roomId: String) {
+                    override fun onResultSuccess(roomId: String,serviceId:String) {
                         Log.i("roomId", roomId)
                         Toast.makeText(this@MainActivity, "预约成功", Toast.LENGTH_SHORT).show()
                         intent.putExtra("roomId", roomId)
@@ -257,6 +253,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             )
 
         }
+    }
+
+    override fun onTxVideoBtClick(btType: TXSdk.VideoBtType) {
+       var btTypeStr = when (btType) {
+            TXSdk.VideoBtType.MUTEAUDIO -> {
+               "开启声音"
+            }
+            TXSdk.VideoBtType.MUTEVIDEO -> {
+                "开启视频"
+            }
+            TXSdk.VideoBtType.SWITCHVIDEO -> {
+                "切换摄像头"
+            }
+            TXSdk.VideoBtType.STARTSCREEN -> {
+                "开始投屏"
+            }
+            TXSdk.VideoBtType.SHOWFLOAT -> {
+                "显示浮窗"
+            }
+
+        }
+
+        TxLogUtils.i(btTypeStr)
     }
 
 }

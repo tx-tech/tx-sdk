@@ -11,6 +11,16 @@
         android:gravity="center"
         android:background="@drawable/tx_shape_round_blue_3"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tx_video_float_title"
+            android:textSize="12sp"
+            android:textColor="@color/tx_color_006DFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
